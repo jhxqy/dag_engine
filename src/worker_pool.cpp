@@ -23,7 +23,7 @@ void WorkerPool::Work(int idx) {
   }
 }
 
-void WorkerPool::AddTask(std::function<void()> v) {
+void WorkerPool::Execute(std::function<void()> v) {
   int minIdx = 0;
   int minSize = 1000;
   int queueIdx = 0;
@@ -31,6 +31,7 @@ void WorkerPool::AddTask(std::function<void()> v) {
     int nowSize = task_queues_[i].Size();
     if (nowSize == 0) {
       queueIdx = i;
+      break;
     }
     if (nowSize < minSize) {
       minIdx = queueIdx;

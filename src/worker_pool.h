@@ -15,7 +15,7 @@ class WorkerPool {
 public:
   WorkerPool(int thread_num);
   void Work(int idx);
-  void AddTask(std::function<void()>);
+  void Execute(std::function<void()>);
   void Stop();
   void Run();
 };

@@ -62,7 +62,6 @@ void DAGContext::Finish(const std::string &node_name) {
       runable_nodes.insert(downstream_node);
     }
   }
-  std::lock_guard<std::mutex> lg(m_);
   // 插入run任务，进行循环，如果全部执行完了，就结束
   // 直接在这里触发下游任务吖
   if (runable_nodes.size() == 0) {
@@ -123,5 +122,5 @@ int DAGEngine::Run(std::shared_ptr<DAGContext> ctx) {
 }
 
 void DAGEngine::RunInWorker(std::function<void()> task) {
-  workerPool_->AddTask(task);
+  workerPool_->Execute(task);
 }
